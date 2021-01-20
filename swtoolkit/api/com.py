@@ -22,9 +22,9 @@ class COM:
 
     instance = None
 
-    # def process_exists(cls):
-    #     if "SLDWORKS.exe" not in [p.name() for p in psutil.process_iter()]:
-    #         cls.instance = None
+    def process_exists(cls):
+        if "SLDWORKS.exe" not in [p.name() for p in psutil.process_iter()]:
+            cls.instance = None
 
     def __new__(cls, prog_id):
         if not cls.instance:

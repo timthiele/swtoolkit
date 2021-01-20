@@ -1,4 +1,5 @@
 import subprocess
+from time import sleep
 
 import win32gui
 import win32process
@@ -58,6 +59,7 @@ def test_start():
     execution of start().
     """
     SolidWorks.start()
+    sleep(20)
     assert "SLDWORKS.exe" in [p.name() for p in psutil.process_iter()]
 
 
@@ -69,6 +71,7 @@ def test_kill():
 
     if "SLDWORKS.exe" not in [p.name() for p in psutil.process_iter()]:
         SolidWorks.start()
+        sleep(20)
     SolidWorks.kill()
     assert "SLDWORKS.exe" not in [p.name() for p in psutil.process_iter()]
 
@@ -77,6 +80,7 @@ def test_pid():
     """Check if PID returned by SolidWorks matches PID in process list"""
 
     SolidWorks.start()
+    sleep(20)
     assert SolidWorks().pid in [
         p.pid for p in psutil.process_iter() if p.name() == "SLDWORKS.exe"
     ]
